@@ -12,9 +12,19 @@ S = "${WORKDIR}/forked-daapd-${PV}"
 DEPENDS = "libgcrypt libunistring zlib confuse libmxml sqlite3 libevent json-c libantlr3c ffmpeg avahi libplist libsodium libwebsockets"
 RDEPENDS_${PN} += "libgcc"
 
-inherit pkgconfig autotools gettext
+inherit pkgconfig autotools gettext useradd
 
 EXTRA_OECONF = ""
 
 FILES_${PN} += "${libdir}/forked-daapd/forked-daapd-sqlext.so ${datadir}/forked-daapd/htdocs/* /run"
 
+do_install_append() {
+    chown -R daapd:daapd ${D}/${localstatedir}/cache/forked-daapd/
+}
+
+USERADD_PACKAGES = "${PN}"
+USERADD_PARAM_${PN} = " \
+    --system --no-create-home \
+    --home ${localstatedir}/cache/forked-daapd \
+    --groups audio \
+    --user-group daapd"
