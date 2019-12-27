@@ -1,0 +1,24 @@
+From 4bb1fd437f4fe68b7b6641d49eb38915631e897c Mon Sep 17 00:00:00 2001
+From: Christian Meffert <christian.meffert@googlemail.com>
+Date: Sat, 7 Dec 2019 06:50:23 +0000
+Subject: [PATCH] Disable creation of log and run directories
+
+---
+ Makefile.am | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/Makefile.am b/Makefile.am
+index 817b7df..1c9a8fa 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -29,8 +29,8 @@ EXTRA_DIST = \
+ 
+ install-data-hook:
+ 	$(MKDIR_P) "$(DESTDIR)$(localstatedir)/cache/$(PACKAGE)/libspotify"
+-	$(MKDIR_P) "$(DESTDIR)$(localstatedir)/log"
+-	$(MKDIR_P) "$(DESTDIR)$(localstatedir)/run"
++#	$(MKDIR_P) "$(DESTDIR)$(localstatedir)/log"
++#	$(MKDIR_P) "$(DESTDIR)$(localstatedir)/run"
+ 
+ CLEANFILES = $(BUILT_SOURCES)
+ 
